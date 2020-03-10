@@ -1613,7 +1613,6 @@ class ClassCollapseTest extends \PHPUnit\Framework\TestCase
                 [
                     'transition-none',
                     'transition-all',
-                    'transition',
                     'transition-colors',
                     'transition-opacity',
                     'transition-shadow',
