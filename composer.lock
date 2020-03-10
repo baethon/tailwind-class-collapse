@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0ac06115779a1d34dbbc3131fe95f7b",
-    "packages": [],
+    "content-hash": "08156d1f25e9f77f086c1a7571a9f26c",
+    "packages": [
+        {
+            "name": "baethon/phln",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/baethon/phln.git",
+                "reference": "a9ddd9f5166553cdc6a3a43500564c4f252c31ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/baethon/phln/zipball/a9ddd9f5166553cdc6a3a43500564c4f252c31ed",
+                "reference": "a9ddd9f5166553cdc6a3a43500564c4f252c31ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "~1.0.5",
+                "illuminate/console": "^5.4",
+                "illuminate/view": "^5.4",
+                "phpdocumentor/reflection-docblock": "^3.1",
+                "phpunit/phpunit": "^6.5",
+                "squizlabs/php_codesniffer": "^3.3",
+                "symfony/console": "^3.2",
+                "symfony/process": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phln\\": "src",
+                    "Baethon\\Phln\\": "src"
+                },
+                "files": [
+                    "src/functions.php",
+                    "src/bundle.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Radoslaw Mejer",
+                    "email": "radmen@radmen.info"
+                }
+            ],
+            "description": "Set of small utility functions. Inspired by Ramda.",
+            "time": "2020-03-10T10:52:40+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",

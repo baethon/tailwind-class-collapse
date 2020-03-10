@@ -13,7 +13,9 @@
             "email": "radmen@baethon.com"
         }
     ],
-    "require": {},
+    "require": {
+        "baethon/phln": "^2.2"
+    },
     "autoload": {
         "psr-4": {
             "Baethon\\Tailwind\\": "src/"
