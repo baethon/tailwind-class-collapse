@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "dependencies": {
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8"
+  },
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged"
+      }
+  },
+  "lint-staged": {
+      "*.php": "./vendor/bin/phpcbf"
+  }
+}
