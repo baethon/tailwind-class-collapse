@@ -2,7 +2,7 @@
 
 namespace Baethon\Tailwind;
 
-function tailwind_class_collapse($list): string
+function collapse_classes($list): string
 {
     $instance = is_array($list)
         ? ClassCollapse::fromArray($list)
