@@ -71,13 +71,9 @@ class ClassCollapse
     {
         foreach ($groups as $key => $list) {
             foreach ($list as $name) {
-                /** @var \Baethon\Phln\RegExp $name */
-                if (is_object($name) && $name->test($className)) {
-                    return $key;
-                }
+                /** @var Pattern $name */
 
-                /** @var string $name */
-                if ($name === $className) {
+                if ($name->test($className)) {
                     return $key;
                 }
             }

@@ -1857,4 +1857,16 @@ class ClassCollapseTest extends \PHPUnit\Framework\TestCase
             ],
         ];
     }
+
+    /** @dataProvider pseudoClassesProvider */
+    public function testItCollapsesByPseudoClasses(string $list, string $expected)
+    {
+        $this->assertEquals($expected, collapse_classes($list));
+    }
+
+    public function pseudoClassesProvider(): array
+    {
+        return [
+        ];
+    }
 }

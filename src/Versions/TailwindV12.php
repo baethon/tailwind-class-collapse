@@ -3,7 +3,6 @@
 namespace Baethon\Tailwind\Versions;
 
 use Baethon\Tailwind\Utils;
-use Baethon\Phln\RegExp;
 
 class TailwindV12 implements VersionInterface
 {
@@ -21,9 +20,7 @@ class TailwindV12 implements VersionInterface
 
     private static function createGroups(): array
     {
-        $r = fn (string $pattern) => RegExp::of("/^{$pattern}$/");
-
-        return [
+        return Utils::wrapGroupsInPattern([
             [
                 'hidden', 'block', 'inline-block', 'inline',
                 'flex', 'inline-flex', 'grid',
@@ -62,7 +59,7 @@ class TailwindV12 implements VersionInterface
             Utils::mix('bottom', ['0', 'auto']),
             Utils::mix('left', ['0', 'auto']),
             ['visible', 'invisible'],
-            [$r('z-\d+'), 'z-auto'],
+            ['r:z-\d+', 'z-auto'],
             [
                 'flex-row',
                 ...Utils::mix('flex', ['col', 'row']),
@@ -76,56 +73,56 @@ class TailwindV12 implements VersionInterface
             Utils::mix('flex', ['initial', '1', 'auto', 'none']),
             ['flex-grow', 'flex-grow-0'],
             ['flex-shrink', 'flex-shrink-0'],
-            [...Utils::mix('order', ['first', 'last', 'none']), $r('order-\w+')],
-            ['grid-cols-none', $r('grid-cols-\d+')],
-            ['col-auto', $r('col-span-\d+')],
-            ['col-start-auto', $r('col-start-\d+')],
-            ['col-end-auto', $r('col-end-\d+')],
-            ['grid-rows-none', $r('grid-rows-\d+')],
-            ['row-auto', $r('row-span-\d+')],
-            ['row-start-auto', $r('row-start-\d+')],
-            ['row-end-auto', $r('row-end-\d+')],
-            ['gap-px', $r('gap-\d+')],
-            ['row-gap-px', $r('row-gap-\d+')],
-            ['col-gap-px', $r('col-gap-\d+')],
+            [...Utils::mix('order', ['first', 'last', 'none']), 'r:order-\w+'],
+            ['grid-cols-none', 'r:grid-cols-\d+'],
+            ['col-auto', 'r:col-span-\d+'],
+            ['col-start-auto', 'r:col-start-\d+'],
+            ['col-end-auto', 'r:col-end-\d+'],
+            ['grid-rows-none', 'r:grid-rows-\d+'],
+            ['row-auto', 'r:row-span-\d+'],
+            ['row-start-auto', 'r:row-start-\d+'],
+            ['row-end-auto', 'r:row-end-\d+'],
+            ['gap-px', 'r:gap-\d+'],
+            ['row-gap-px', 'r:row-gap-\d+'],
+            ['col-gap-px', 'r:col-gap-\d+'],
             [
                 ...Utils::mix('grid-flow', ['row', 'col']),
                 ...Utils::mix('grid-flow', ['row', 'col'], '%s-%s-dense'),
             ],
-            ['p-px', $r('p-\d+')],
-            ['px-px', $r('px-\d+')],
-            ['py-px', $r('py-\d+')],
-            ['pt-px', $r('pt-\d+')],
-            ['pr-px', $r('pr-\d+')],
-            ['pb-px', $r('pb-\d+')],
-            ['pl-px', $r('pl-\d+')],
-            ['m-auto', $r('-?m-px'), $r('-?m-\d+')],
-            ['mx-auto', $r('-?mx-\d+'), $r('-?mx-px')],
-            ['my-auto', $r('-?my-px'), $r('-?my-\d+')],
-            ['mt-auto', $r('-?mt-px'), $r('-?mt-\d+')],
-            ['mr-auto', $r('-?mr-px'), $r('-?mr-\d+')],
-            ['mb-auto', $r('-?mb-px'), $r('-?mb-\d+')],
-            ['ml-auto', $r('-?ml-px'), $r('-?ml-\d+')],
+            ['p-px', 'r:p-\d+'],
+            ['px-px', 'r:px-\d+'],
+            ['py-px', 'r:py-\d+'],
+            ['pt-px', 'r:pt-\d+'],
+            ['pr-px', 'r:pr-\d+'],
+            ['pb-px', 'r:pb-\d+'],
+            ['pl-px', 'r:pl-\d+'],
+            ['m-auto', 'r:-?m-px', 'r:-?m-\d+'],
+            ['mx-auto', 'r:-?mx-\d+', 'r:-?mx-px'],
+            ['my-auto', 'r:-?my-px', 'r:-?my-\d+'],
+            ['mt-auto', 'r:-?mt-px', 'r:-?mt-\d+'],
+            ['mr-auto', 'r:-?mr-px', 'r:-?mr-\d+'],
+            ['mb-auto', 'r:-?mb-px', 'r:-?mb-\d+'],
+            ['ml-auto', 'r:-?ml-px', 'r:-?ml-\d+'],
             [
                 ...Utils::mix('w', ['px', 'full', 'screen', 'auto']),
-                $r('w-\d+'), $r('w-\d+\/\d+')
+                'r:w-\d+', 'r:w-\d+\/\d+'
             ],
             Utils::mix('min-w', ['0', 'full']),
             [
                 ...Utils::mix('max-w', ['xs', 'sm', 'md', 'lg', 'xl', 'full', 'none']),
                 ...Utils::mix('max-w-screen', ['sm', 'md', 'lg', 'xl']),
-                $r('max-w-\d+xl'),
+                'r:max-w-\d+xl',
             ],
             [
                 ...Utils::mix('h', ['px', 'full', 'screen', 'auto']),
-                $r('h-\d+'), $r('h-\d+\/\d+'),
+                'r:h-\d+', 'r:h-\d+\/\d+',
             ],
             Utils::mix('min-h', ['0', 'full', 'screen']),
             Utils::mix('max-h', ['full', 'screen']),
             Utils::mix('font', ['sans', 'serif', 'mono']),
             [
                 ...Utils::mix('text', ['xs', 'sm', 'base', 'lg', 'xl']),
-                $r('text-\d+xl'),
+                'r:text-\d+xl',
             ],
             ['antialiased', 'subpixel-antialiased'],
             ['italic', 'not-italic'],
@@ -133,18 +130,18 @@ class TailwindV12 implements VersionInterface
             Utils::mix('tracking', ['tighter', 'tight', 'normal', 'wide', 'wider', 'widest']),
             [
                 ...Utils::mix('leading', ['none', 'tight', 'snug', 'normal', 'relaxed', 'loose']),
-                $r('leading-\d+'),
+                'r:leading-\d+',
             ],
             Utils::mix('list', ['none', 'disc', 'decimal']),
             Utils::mix('list', ['inside', 'outside']),
             [
                 ...Utils::mix('placeholder', ['transparent', 'black', 'white']),
-                $r('placeholder-\w+-\d+'),
+                'r:placeholder-\w+-\d+',
             ],
             Utils::mix('text', ['left', 'center', 'right', 'justify']),
             [
                 ...Utils::mix('text', ['transparent', 'black', 'white']),
-                $r('text-\w+-\d+'),
+                'r:text-\w+-\d+',
             ],
             ['underline', 'no-underline', 'line-through'],
             ['uppercase', 'lowercase', 'capitalize', 'normal-case'],
@@ -160,7 +157,7 @@ class TailwindV12 implements VersionInterface
             Utils::mix('bg', ['fixed', 'local', 'scroll']),
             [
                 ...Utils::mix('bg', ['transparent', 'black', 'white']),
-                $r('bg-\w+-\d+'),
+                'r:bg-\w+-\d+',
             ],
             [
                 ...Utils::mix('bg', ['bottom', 'center', 'left', 'right', 'top']),
@@ -173,14 +170,14 @@ class TailwindV12 implements VersionInterface
             ],
             Utils::mix('bg', ['auto', 'cover', 'contain']),
             Utils::mix('border', ['solid', 'dashed', 'dotted', 'double', 'none']),
-            ['border', $r('border-\d+')],
-            ['border-t', $r('border-t-\d+')],
-            ['border-r', $r('border-r-\d+')],
-            ['border-b', $r('border-b-\d+')],
-            ['border-l', $r('border-l-\d+')],
+            ['border', 'r:border-\d+'],
+            ['border-t', 'r:border-t-\d+'],
+            ['border-r', 'r:border-r-\d+'],
+            ['border-b', 'r:border-b-\d+'],
+            ['border-l', 'r:border-l-\d+'],
             [
                 ...Utils::mix('border', ['transparent', 'black', 'white']),
-                $r('border-\w+-\d+'),
+                'r:border-\w+-\d+',
             ],
             [
                 ...Utils::mix('rounded', ['none', 'sm', 'md', 'lg', 'full']),
@@ -220,8 +217,8 @@ class TailwindV12 implements VersionInterface
             ],
             Utils::mix('border', ['collapse', 'separate']),
             Utils::mix('table', ['auto', 'fixed']),
-            ['shadow', $r('shadow-\w+')],
-            [$r('opacity-\d+')],
+            ['shadow', 'r:shadow-\w+'],
+            ['r:opacity-\d+'],
             [
                 ...Utils::mix('transition', [
                     'none',
@@ -233,16 +230,16 @@ class TailwindV12 implements VersionInterface
                 ]),
                 'transition',
             ],
-            [$r('duration-\d+')],
+            ['r:duration-\d+'],
             Utils::mix('ease', ['linear', 'in', 'out', 'in-out']),
-            [$r('scale-\d+')],
-            [$r('scale-x-\d+')],
-            [$r('scale-y-\d+')],
-            [$r('-?rotate-\d+')],
-            [$r('-?translate-x-\d+'), $r('-?translate-x-(full|px)'), $r('-?translate-x-1\/2')],
-            [$r('-?translate-y-\d+'), $r('-?translate-y-(full|px)'), $r('-?translate-y-1\/2')],
-            [$r('-?skew-x-\d+')],
-            [$r('-?skew-y-\d+')],
+            ['r:scale-\d+'],
+            ['r:scale-x-\d+'],
+            ['r:scale-y-\d+'],
+            ['r:-?rotate-\d+'],
+            ['r:-?translate-x-\d+', 'r:-?translate-x-(full|px)', 'r:-?translate-x-1\/2'],
+            ['r:-?translate-y-\d+', 'r:-?translate-y-(full|px)', 'r:-?translate-y-1\/2'],
+            ['r:-?skew-x-\d+'],
+            ['r:-?skew-y-\d+'],
             Utils::mix('origin', ['center', 'top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left']),
             Utils::mix('cursor', [
                 'auto',
@@ -259,9 +256,9 @@ class TailwindV12 implements VersionInterface
                 'resize',
             ],
             Utils::mix('select', ['none', 'text', 'all', 'auto']),
-            [$r('stroke-\d+')],
+            ['r:stroke-\d+'],
             ['sr-only', 'not-sr-only'],
-        ];
+        ]);
     }
 
     private static function createPrefixes(): array

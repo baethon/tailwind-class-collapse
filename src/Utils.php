@@ -2,6 +2,8 @@
 
 namespace Baethon\Tailwind;
 
+use Baethon\Phln\Phln as P;
+
 class Utils
 {
     public static function mix(string $base, array $postfixes, string $format = '%s-%s'): array
@@ -23,5 +25,16 @@ class Utils
         }
 
         return $list;
+    }
+
+    public static function wrapGroupsInPattern(array $groups): array
+    {
+        return array_map(
+            fn (array $list) => array_map(
+                fn ($pattern) => Pattern::of($pattern),
+                $list,
+            ),
+            $groups,
+        );
     }
 }
