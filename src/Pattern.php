@@ -38,7 +38,7 @@ class Pattern
     {
         $pattern = $this->regexp
             ? sprintf('r:%s%s', $prefix, substr($this->pattern, 2, -2))
-            : $this->pattern;
+            : "{$prefix}{$this->pattern}";
 
         return Pattern::of($pattern, "{$prefix}{$this->groupId}");
     }
