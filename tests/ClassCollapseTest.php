@@ -1867,6 +1867,26 @@ class ClassCollapseTest extends \PHPUnit\Framework\TestCase
     public function pseudoClassesProvider(): array
     {
         return [
+            [
+                'hidden bg-blue-900 md:block md:bg-white md:border-b',
+                'hidden bg-blue-900 md:block md:bg-white md:border-b'
+            ],
+            [
+                'hidden bg-blue-900 border-b md:block md:bg-white md:border-b md:border-b-10',
+                'hidden bg-blue-900 border-b md:block md:bg-white md:border-b-10'
+            ],
+            [
+                'no-underline text-white opacity-50 md:text-grey-900 md:opacity-100 flex items-center py-4 border-b border-transparent hover:opacity-100 md:hover:border-grey-900 md:hover:border-grey-100',
+                'no-underline text-white opacity-50 md:text-grey-900 md:opacity-100 flex items-center py-4 border-b border-transparent hover:opacity-100 md:hover:border-grey-100'
+            ],
+            [
+                'block bg-white rounded-full text-teal-500 text-xs font-bold px-3 py-2 leading-none flex items-center lg:bg-red-500',
+                'bg-white rounded-full text-teal-500 text-xs font-bold px-3 py-2 leading-none flex items-center lg:bg-red-500'
+            ],
+            [
+                'w-full lg:px-6 xl:w-3/4 xl:px-12 lg:px-2',
+                'w-full xl:w-3/4 xl:px-12 lg:px-2'
+            ]
         ];
     }
 }
