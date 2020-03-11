@@ -2,8 +2,6 @@
 
 namespace Baethon\Tailwind;
 
-use Baethon\Phln\Phln as P;
-
 class ClassCollapse
 {
     private static $version = Versions\TailwindV12::class;
@@ -80,9 +78,13 @@ class ClassCollapse
 
     private function isUsed(?string $groupKey): bool
     {
-        return is_null($groupKey)
-            ? false
-            : P::contains($groupKey, $this->usedGroups);
+        if (is_null($groupKey)) {
+            return false;
+        }
+
+        $search = array_search($groupKey, $this->usedGroups);
+
+        return $search !== false;
     }
 
     private function getPatterns(): array
