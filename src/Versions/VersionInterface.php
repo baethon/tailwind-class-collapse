@@ -4,5 +4,5 @@ namespace Baethon\Tailwind\Versions;
 
 interface VersionInterface
 {
-    public static function getGroups(): array;
+    public static function getPatterns(): array;
 }

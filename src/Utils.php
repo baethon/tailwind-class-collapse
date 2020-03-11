@@ -37,4 +37,64 @@ class Utils
             $groups,
         );
     }
+
+    public static function expandWithPrefixes(array $groups, array $prefixes): array
+    {
+        return $groups;
+        $extendedGroups = $groups;
+
+        foreach ($prefixes as $prefix) {
+            foreach ($groups as $list) {
+                $extendedGroups[] = array_map(
+                    fn (Pattern $pattern) => $pattern->addPrefix($prefix),
+                    $list,
+                );
+            }
+        }
+
+        return $extendedGroups;
+    }
+
+    private static function flattenPatterns(array $groups): array
+    {
+        $patterns = [];
+
+        foreach ($groups as $groupId => $list) {
+            $patterns = [
+                ...$patterns,
+                ...array_map(
+                    fn (string $match) => Pattern::of($match, $groupId),
+                    $list,
+                ),
+            ];
+        }
+
+        return $patterns;
+    }
+
+    /**
+     * Export list of patterns using multi-dimensions array with string values
+     *
+     * @param array $groups         Nested list of string patterns, it will be flattened
+     *                              and wrapped in Pattern instance
+     * @param array $prefixesList   List of Tailwind pseudo-class prefixes
+     * @return Pattern[]
+     */
+    public static function exportPatterns(array $groups, array $prefixesList): array
+    {
+        $patterns = static::flattenPatterns($groups);
+        $expandedPatterns = $patterns;
+
+        foreach ($prefixesList as $prefix) {
+            $expandedPatterns = [
+                ...$expandedPatterns,
+                ...array_map(
+                    fn (Pattern $pattern) => $pattern->addPrefix("{$prefix}:"),
+                    $patterns,
+                ),
+            ];
+        }
+
+        return $expandedPatterns;
+    }
 }

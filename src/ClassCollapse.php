@@ -41,11 +41,11 @@ class ClassCollapse
         }
 
         $classList = [];
-        $groups = $this->getGroups();
+        $patterns = $this->getPatterns();
 
         for ($i = count($this->list) - 1; $i >= 0; $i--) {
             $className = $this->list[$i];
-            $groupId = $this->findGroup($className, $groups);
+            $groupId = $this->findGroup($className, $patterns);
 
             if ($this->isUsed($groupId)) {
                 continue;
@@ -64,35 +64,31 @@ class ClassCollapse
      * Try to locate the key of the stored groups
      *
      * @param string $className
-     * @param array $groups
-     * @return int|null
+     * @param Pattern[] $patternsList
+     * @return string|null
      */
-    private function findGroup(string $className, array $groups): ?int
+    private function findGroup(string $className, array $patternsList): ?string
     {
-        foreach ($groups as $key => $list) {
-            foreach ($list as $name) {
-                /** @var Pattern $name */
-
-                if ($name->test($className)) {
-                    return $key;
-                }
+        foreach ($patternsList as $pattern) {
+            if ($pattern->test($className)) {
+                return $pattern->getGroupId();
             }
         }
 
         return null;
     }
 
-    private function isUsed(?int $groupKey): bool
+    private function isUsed(?string $groupKey): bool
     {
         return is_null($groupKey)
             ? false
             : P::contains($groupKey, $this->usedGroups);
     }
 
-    private function getGroups(): array
+    private function getPatterns(): array
     {
         /** @var callable $callable */
-        $callable = sprintf('%s::getGroups', static::$version);
+        $callable = sprintf('%s::getPatterns', static::$version);
 
         return $callable();
     }
