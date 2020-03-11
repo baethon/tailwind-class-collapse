@@ -21,8 +21,7 @@
             "Baethon\\Tailwind\\": "src/"
         },
         "files": [
-            "./src/functions.php",
-            "./src/Groups/get_v12_groups.php"
+            "./src/functions.php"
         ]
     },
     "scripts": {

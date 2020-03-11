@@ -6,7 +6,7 @@ use Baethon\Phln\Phln as P;
 
 class ClassCollapse
 {
-    public static $version = Tailwind::V1_2;
+    private static $version = Versions\TailwindV12::class;
 
     private array $list;
 
@@ -17,6 +17,11 @@ class ClassCollapse
     public function __construct(array $list)
     {
         $this->list = $list;
+    }
+
+    public static function setVersion(Versions\VersionInterface $version): void
+    {
+        static::$version = $version;
     }
 
     public static function fromString(string $list): ClassCollapse
@@ -90,10 +95,9 @@ class ClassCollapse
 
     private function getGroups(): array
     {
-        switch (ClassCollapse::$version) {
-            case Tailwind::V1_2:
-            default:
-                return Groups\get_v12_groups();
-        }
+        /** @var callable $callable */
+        $callable = sprintf('%s::getGroups', static::$version);
+
+        return $callable();
     }
 }
