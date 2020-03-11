@@ -38,23 +38,6 @@ class Utils
         );
     }
 
-    public static function expandWithPrefixes(array $groups, array $prefixes): array
-    {
-        return $groups;
-        $extendedGroups = $groups;
-
-        foreach ($prefixes as $prefix) {
-            foreach ($groups as $list) {
-                $extendedGroups[] = array_map(
-                    fn (Pattern $pattern) => $pattern->addPrefix($prefix),
-                    $list,
-                );
-            }
-        }
-
-        return $extendedGroups;
-    }
-
     private static function flattenPatterns(array $groups): array
     {
         $patterns = [];
