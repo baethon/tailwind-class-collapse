@@ -90,6 +90,10 @@ class ClassCollapse
 
     private function getGroups(): array
     {
-        return require(sprintf('%s/groups/%s.php', __DIR__, ClassCollapse::$version));
+        switch (ClassCollapse::$version) {
+            case Tailwind::V1_2:
+            default:
+                return Groups\get_v12_groups();
+        }
     }
 }

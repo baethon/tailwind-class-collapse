@@ -1,6 +1,6 @@
 <?php
 
-namespace Baethon\Tailwind;
+namespace Baethon\Tailwind\Groups;
 
 class Utils
 {
