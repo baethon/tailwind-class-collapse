@@ -2,40 +2,27 @@
 
 namespace Baethon\Tailwind;
 
-use Baethon\Phln\Phln as P;
-
 class Utils
 {
-    public static function mix(string $base, array $postfixes, string $format = '%s-%s'): array
+    public static function mix(string $left, array $rightList, string $format = '%s-%s'): array
     {
         return array_map(
-            fn ($postfix) => sprintf($format, $base, $postfix),
-            $postfixes,
+            fn ($right) => sprintf($format, $left, $right),
+            $rightList,
         );
     }
 
-    public static function mixAll(array $base, array $postfixes, string $format = '%s-%s'): array
+    public static function mixAll(array $leftList, array $rightList, string $format = '%s-%s'): array
     {
         $list = [];
 
-        foreach ($base as $baseString) {
-            foreach ($postfixes as $postfixString) {
-                $list[] = sprintf($format, $baseString, $postfixString);
+        foreach ($leftList as $left) {
+            foreach ($rightList as $right) {
+                $list[] = sprintf($format, $left, $right);
             }
         }
 
         return $list;
-    }
-
-    public static function wrapGroupsInPattern(array $groups): array
-    {
-        return array_map(
-            fn (array $list) => array_map(
-                fn ($pattern) => Pattern::of($pattern),
-                $list,
-            ),
-            $groups,
-        );
     }
 
     private static function flattenPatterns(array $groups): array
