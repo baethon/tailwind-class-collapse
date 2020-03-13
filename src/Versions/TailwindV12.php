@@ -206,7 +206,7 @@ class TailwindV12 implements VersionInterface
                     ...Utils::mix('rounded-bl', ['none', 'sm', 'md', 'lg', 'full']),
                     'rounded-bl',
                 ],
-                'border-bottom-right-radius' =>[
+                'border-bottom-right-radius' => [
                     ...Utils::mix('rounded-br', ['none', 'sm', 'md', 'lg', 'full']),
                     'rounded-br',
                 ],
@@ -254,11 +254,11 @@ class TailwindV12 implements VersionInterface
                 'stroke-width' => ['r:stroke-\d+'],
                 'screen-readers' => ['sr-only', 'not-sr-only'],
             ],
-            static::getPrefixes(),
+            static::getPseudoClasses(),
         );
     }
 
-    private static function getPrefixes(): array
+    private static function getPseudoClasses(): array
     {
         $pseudoClasses = [
             'hover',
