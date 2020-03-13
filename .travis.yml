@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.4
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - export PATH="$PATH:/home/travis/.composer/vendor/bin"
+
+jobs:
+  include:
+    - script: composer lint
+    - script: composer test
