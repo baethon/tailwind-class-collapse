@@ -4,7 +4,7 @@ namespace Baethon\Tailwind;
 
 class ClassCollapse
 {
-    private static $version = Versions\TailwindV12::class;
+    private static string $tailwindVersion = Tailwind::V1_2;
 
     private array $list;
 
@@ -17,9 +17,9 @@ class ClassCollapse
         $this->list = $list;
     }
 
-    public static function setVersion(Versions\VersionInterface $version): void
+    public static function setTailwindVersion(string $version): void
     {
-        static::$version = $version;
+        static::$tailwindVersion = $version;
     }
 
     public static function fromString(string $list): ClassCollapse
@@ -82,16 +82,19 @@ class ClassCollapse
             return false;
         }
 
-        $search = array_search($groupKey, $this->usedGroups);
+        $foundKey = array_search($groupKey, $this->usedGroups);
 
-        return $search !== false;
+        return $foundKey !== false;
     }
 
     private function getPatterns(): array
     {
-        /** @var callable $callable */
-        $callable = sprintf('%s::getPatterns', static::$version);
+        static $patterns;
 
-        return $callable();
+        return $patterns ?? $patterns = require(sprintf(
+            '%s/data/%s.php',
+            __DIR__,
+            static::$tailwindVersion,
+        ));
     }
 }
