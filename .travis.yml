@@ -10,6 +10,9 @@ cache:
 before_script:
   - export PATH="$PATH:/home/travis/.composer/vendor/bin"
 
+install:
+  - composer install
+
 jobs:
   include:
     - script: composer lint
