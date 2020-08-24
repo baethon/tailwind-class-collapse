@@ -9,7 +9,7 @@ class ClassCollapseTest extends \PHPUnit\Framework\TestCase
     /** @dataProvider arrayCollapseProvider */
     public function testItCollapsesAnArray(array $list, string $expected)
     {
-        $this->assertEquals($expected, collapse_classes($list));
+        $this->assertSame($expected, collapse_classes($list));
     }
 
     public function arrayCollapseProvider()
@@ -1861,7 +1861,7 @@ class ClassCollapseTest extends \PHPUnit\Framework\TestCase
     /** @dataProvider pseudoClassesProvider */
     public function testItCollapsesByPseudoClasses(string $list, string $expected)
     {
-        $this->assertEquals($expected, collapse_classes($list));
+        $this->assertSame($expected, collapse_classes($list));
     }
 
     public function pseudoClassesProvider(): array

@@ -24,6 +24,11 @@
             "./src/functions.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "scripts": {
         "test": "phpunit",
         "lint": "phpcs -n"
